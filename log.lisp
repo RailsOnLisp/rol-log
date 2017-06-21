@@ -32,13 +32,13 @@
 
 (defun log-msg (level fmt &rest args)
   (let ((*print-case* :upcase)
-	(*print-pretty* nil))
+        (*print-pretty* nil))
     (format *log-output* "~&~A ~?~%" level fmt args)
     (force-output *log-output*)))
 
 (defmacro with-logged-warnings (&body body)
   `(handler-bind ((warning
-		   (lambda (w)
-		     (log-msg :warn "~A" w)
-		     (muffle-warning w))))
+                   (lambda (w)
+                     (log-msg :warn "~A" w)
+                     (muffle-warning w))))
      ,@body))
